@@ -7,5 +7,12 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url = "file:./prisma.db"
+  url = "file:./dev.db"
+}
+
+model Product {
+  id String @id @default(cuid())
+  name String
+  description String
+  price Int
 }

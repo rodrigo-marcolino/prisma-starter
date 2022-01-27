@@ -32,6 +32,24 @@ app.post('/products', async (req: Request, res: Response) => {
   res.json(product)
 })
 
+app.post('/reviews', async (req: Request, res: Response) => {
+  const { body } = req
+
+  const review = await prisma.review.create({
+    data: {
+      text: body.text,
+      rating: body.rating,
+      product: {
+        connect: {
+          id: body.productId,
+        },
+      },
+    },
+  })
+
+  res.json(review)
+})
+
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`)
 })

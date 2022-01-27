@@ -4,7 +4,7 @@
   "description": "Using Prisma in a TypeScript-based Node project",
   "main": "dist/server.js",
   "scripts": {
-    "start:nodemon": "./node_modules/nodemon/bin/nodemon.js",
+    "lint": "eslint . --ext .ts",
     "start": "nodemon ./src/server.ts",
     "start:prod": "npm run build && node ./dist/src/server.js",
     "build": "npx tsc"

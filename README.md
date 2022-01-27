@@ -38,16 +38,15 @@ REST API endpoints:
 ### `POST`
 
 - `/products`: Add a new product.
-- Body:
-  - `name: String` : The product name
-  - `description: String` : The product description
-  - `price: Int` : The product price
+  - Body:
+    - `name: String` : The product name
+    - `description: String` : The product description
+    - `price: Int` : The product price
 - `/reviews`: Add a new Review
-- Body:
-
-  - `text: String` : Review about the a specific product
-  - `rating: Int` : The product rating
-  - `productId: String` : The product id (cuid())
+  - Body:
+    - `text: String` : Review about the a specific product
+    - `rating: Int` : The product rating
+    - `productId: String` : The product id (cuid())
 
   ### `DELETE`
 

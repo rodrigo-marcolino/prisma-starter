@@ -20,28 +20,41 @@ app.get('/products', async (req: Request, res: Response) => {
   res.json(products)
 })
 
+app.get('/products/:id', async (req: Request, res: Response) => {
+  const { id }: { id?: string } = req.params
+  const product = await prisma.product.findUnique({
+    where: {
+      id: id,
+    },
+    include: {
+      reviews: true,
+    },
+  })
+  res.json(product)
+})
+
 app.post('/products', async (req: Request, res: Response) => {
-  const { body } = req
+  const { name, description, price } = req.body
   const product = await prisma.product.create({
     data: {
-      name: body.name,
-      description: body.description,
-      price: body.price,
+      name: name,
+      description: description,
+      price: price,
     },
   })
   res.json(product)
 })
 
 app.post('/reviews', async (req: Request, res: Response) => {
-  const { body } = req
+  const { text, rating, productId } = req.body
 
   const review = await prisma.review.create({
     data: {
-      text: body.text,
-      rating: body.rating,
+      text: text,
+      rating: rating,
       product: {
         connect: {
-          id: body.productId,
+          id: productId,
         },
       },
     },

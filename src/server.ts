@@ -12,18 +12,22 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.get('/products', async (req: Request, res: Response) => {
-  const products = await prisma.product.findMany()
+  const products = await prisma.product.findMany({
+    include: {
+      reviews: true,
+    },
+  })
   res.json(products)
 })
 
 app.post('/products', async (req: Request, res: Response) => {
   const { body } = req
   const product = await prisma.product.create({
-    data:{
+    data: {
       name: body.name,
       description: body.description,
       price: body.price,
-    }
+    },
   })
   res.json(product)
 })

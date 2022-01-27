@@ -19,9 +19,9 @@ model Product {
 }
 
 model Review {
-  id        String   @id @default(cuid())
+  id        String  @id @default(cuid())
   text      String
   rating    Int
-  Product   Product? @relation(fields: [productId], references: [id])
-  productId String?
+  Product   Product @relation(fields: [productId], references: [id])
+  productId String
 }

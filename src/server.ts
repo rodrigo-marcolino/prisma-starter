@@ -47,7 +47,6 @@ app.post('/products', async (req: Request, res: Response) => {
 
 app.post('/reviews', async (req: Request, res: Response) => {
   const { text, rating, productId } = req.body
-
   const review = await prisma.review.create({
     data: {
       text: text,
@@ -61,6 +60,16 @@ app.post('/reviews', async (req: Request, res: Response) => {
   })
 
   res.json(review)
+})
+
+app.delete('/products/:id', async (req: Request, res: Response) => {
+  const { id } = req.params
+  const product = await prisma.product.delete({
+    where: {
+      id: id,
+    },
+  })
+  res.json(product)
 })
 
 app.listen(port, () => {
